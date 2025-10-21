@@ -55,3 +55,8 @@ async def add(slug: str):
 @app.exception_handler(404)
 async def custom_404_handler(request: Request, exc):
     return RedirectResponse(REF_URL, status_code=status.HTTP_303_SEE_OTHER)
+
+
+@app.get("/health")
+def health_check():
+    return {"status": "ok"}
