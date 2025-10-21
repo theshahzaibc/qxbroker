@@ -9,13 +9,22 @@ from dotenv import load_dotenv
 
 load_dotenv()
 REF_URL = os.getenv('REF_URL')
+CUSTOM_DOMAIN = os.getenv('CUSTOM_DOMAIN')
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
 
-# main.py (continued)
+@app.middleware("http")
+async def redirect_to_custom_domain(request: Request, call_next):
+    host = request.headers.get("host", "")
+    if host.endswith("onrender.com"):
+        url = str(request.url).replace(host, CUSTOM_DOMAIN)
+        return RedirectResponse(url=url)
+    return await call_next(request)
+
+
 @app.get("/", response_class=HTMLResponse)
 async def index(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
