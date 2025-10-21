@@ -4,6 +4,11 @@ from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import RedirectResponse
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+REF_URL = os.getenv('REF_URL')
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
@@ -39,17 +44,14 @@ async def index(request: Request):
 @app.get('/go/quotex')
 async def add(request: Request):
     # add_student(name, surname, _class)  # Adding student data
-    redirect_url = "https://broker-qx.pro/sign-up/?lid=1608650"
-    return RedirectResponse(redirect_url, status_code=status.HTTP_303_SEE_OTHER)
+    return RedirectResponse(REF_URL, status_code=status.HTTP_303_SEE_OTHER)
 
 
 @app.get('/go/quotex/{slug}')
 async def add(slug: str):
-    redirect_url = "https://broker-qx.pro/sign-up/?lid=1608650"
-    return RedirectResponse(redirect_url, status_code=status.HTTP_303_SEE_OTHER)
+    return RedirectResponse(REF_URL, status_code=status.HTTP_303_SEE_OTHER)
 
 
 @app.exception_handler(404)
 async def custom_404_handler(request: Request, exc):
-    redirect_url = "https://broker-qx.pro/sign-up/?lid=1608650"
-    return RedirectResponse(redirect_url, status_code=status.HTTP_303_SEE_OTHER)
+    return RedirectResponse(REF_URL, status_code=status.HTTP_303_SEE_OTHER)
