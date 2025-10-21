@@ -5,7 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2291dbd4-9ee0-4bc1-a595-372c0e90f170" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/site/img/blog/how-to-make-quotex-account-in-pakistan.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/site/img/blog/quotex-pakistan-official-account-1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/site/img/blog/quotex-pakistan-official-account-2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/site/img/blog/quotex-pakistan-official-account-4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/site/img/blog/quotex-pakistan-official-website.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/site/img/blog/quotex-pakistan-official-website2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/ar1.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/site/css/blog.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/site/css/blog.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/about.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/about.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/blog.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/blog.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,14 +88,18 @@
     "DefaultHtmlFileTemplate": "HTML File",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "/Users/apple/PycharmProjects/QuotexBroker/templates",
+    "last_opened_file_path": "/Users/apple/PycharmProjects/QuotexBroker/static/site/img/blog",
     "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/static/site/img/blog" />
       <recent name="$PROJECT_DIR$/templates" />
       <recent name="$PROJECT_DIR$/static" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/static/site/img/blog" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -107,6 +122,9 @@
       <updated>1760985721904</updated>
     </task>
     <servers />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName=".env" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="RECENT_FILTERS">
