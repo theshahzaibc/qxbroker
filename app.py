@@ -6,6 +6,8 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import RedirectResponse
 import os
 from dotenv import load_dotenv
+import asyncio
+import httpx
 
 load_dotenv()
 REF_URL = os.getenv('REF_URL')
@@ -14,6 +16,21 @@ CUSTOM_DOMAIN = os.getenv('CUSTOM_DOMAIN')
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
+
+
+async def keep_alive():
+    while True:
+        try:
+            async with httpx.AsyncClient() as client:
+                await client.get("https://{}".format(CUSTOM_DOMAIN), headers={"user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"})
+        except Exception:
+            pass
+        await asyncio.sleep(600)  # ping every 5 minutes
+
+
+@app.on_event("startup")
+async def startup_event():
+    await asyncio.create_task(keep_alive())
 
 
 @app.middleware("http")
@@ -66,8 +83,8 @@ async def custom_404_handler(request: Request, exc):
     return RedirectResponse(REF_URL, status_code=status.HTTP_303_SEE_OTHER)
 
 
-@app.get("/health")
-def health_check():
+@app.api_route("/health", methods=["GET", "HEAD", "POST", "PUT"])
+async def health_check():
     return {"status": "ok"}
 
 
