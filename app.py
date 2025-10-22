@@ -1,4 +1,5 @@
 # main.py
+import uvicorn
 from fastapi import FastAPI, Request, status
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
@@ -22,7 +23,8 @@ async def keep_alive():
     while True:
         try:
             async with httpx.AsyncClient() as client:
-                await client.get("https://{}".format(CUSTOM_DOMAIN), headers={"user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"})
+                await client.get("https://{}".format(CUSTOM_DOMAIN), headers={
+                    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"})
         except Exception:
             pass
         await asyncio.sleep(600)  # ping every 5 minutes
@@ -91,3 +93,8 @@ async def health_check():
 @app.get("/how-to-make-quotex-account-in-pakistan", response_class=HTMLResponse)
 async def index(request: Request):
     return templates.TemplateResponse("ar1.html", {"request": request})
+
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run("app:app", host="0.0.0.0", port=port)
