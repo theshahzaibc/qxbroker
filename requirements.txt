@@ -2,4 +2,3 @@ fastapi
 uvicorn
 Jinja2
 python-dotenv
-httpx
