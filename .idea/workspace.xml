@@ -4,10 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2291dbd4-9ee0-4bc1-a595-372c0e90f170" name="Changes" comment="working directory changed">
+    <list default="true" id="2291dbd4-9ee0-4bc1-a595-372c0e90f170" name="Changes" comment="KEEP ALIVE REMOVED">
+      <change afterPath="$PROJECT_DIR$/static/site/img/blog/how-to-verify-quotex-account-in-pakistan.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/site/img/blog/verify-quotex-account-in-pakistan-1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/site/img/blog/verify-quotex-account-in-pakistan-2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/site/img/blog/verify-quotex-account-in-pakistan-3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/site/img/blog/verify-quotex-account-in-pakistan-4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/site/img/blog/verify-quotex-account-in-pakistan-5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/site/img/blog/verify-quotex-account-in-pakistan-6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/site/img/blog/verify-quotex-account-in-pakistan-7.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/site/img/blog/verify-quotex-account-in-pakistan-8.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/site/img/blog/verify-quotex-account-in-pakistan-9.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/ar2.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/blog.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/blog.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,16 +89,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "Python.app.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "/Users/apple/PycharmProjects/QuotexBroker/static/site/img/blog",
-    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;Python.app.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/apple/PycharmProjects/QuotexBroker/static/site/img/blog&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/static/site/img/blog" />

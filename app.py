@@ -73,3 +73,7 @@ async def health_check():
 @app.get("/how-to-make-quotex-account-in-pakistan", response_class=HTMLResponse)
 async def index(request: Request):
     return templates.TemplateResponse("ar1.html", {"request": request})
+
+@app.get("/how-to-verify-quotex-account-in-pakistan", response_class=HTMLResponse)
+async def index(request: Request):
+    return templates.TemplateResponse("ar2.html", {"request": request})
