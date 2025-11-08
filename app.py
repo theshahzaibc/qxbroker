@@ -77,3 +77,7 @@ async def index(request: Request):
 @app.get("/how-to-verify-quotex-account-in-pakistan", response_class=HTMLResponse)
 async def index(request: Request):
     return templates.TemplateResponse("ar2.html", {"request": request})
+
+@app.get("/quotex-minimum-deposit-in-pakistan-2025", response_class=HTMLResponse)
+async def index(request: Request):
+    return templates.TemplateResponse("ar3.html", {"request": request})
