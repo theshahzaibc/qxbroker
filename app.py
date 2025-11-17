@@ -5,6 +5,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import RedirectResponse
 import os
 from dotenv import load_dotenv
+from data import articles
 
 load_dotenv()
 REF_URL = os.getenv('REF_URL')
@@ -70,14 +71,7 @@ async def health_check():
     return {"status": "ok"}
 
 
-@app.get("/how-to-make-quotex-account-in-pakistan", response_class=HTMLResponse)
-async def index(request: Request):
-    return templates.TemplateResponse("ar1.html", {"request": request})
-
-@app.get("/how-to-verify-quotex-account-in-pakistan", response_class=HTMLResponse)
-async def index(request: Request):
-    return templates.TemplateResponse("ar2.html", {"request": request})
-
-@app.get("/quotex-minimum-deposit-in-pakistan-2025", response_class=HTMLResponse)
-async def index(request: Request):
-    return templates.TemplateResponse("ar3.html", {"request": request})
+@app.get("/{ar_slug}", response_class=HTMLResponse)
+async def index(request: Request, ar_slug: str):
+    page = articles[ar_slug]
+    return templates.TemplateResponse(page, {"request": request})
