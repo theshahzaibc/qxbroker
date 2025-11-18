@@ -71,7 +71,14 @@ async def health_check():
     return {"status": "ok"}
 
 
+@app.get("/sitemap.xml", response_class=HTMLResponse)
+async def index(request: Request):
+    return templates.TemplateResponse("sitemap.xml", {"request": request, "articles": articles})
+
+
 @app.get("/{ar_slug}", response_class=HTMLResponse)
 async def index(request: Request, ar_slug: str):
-    page = articles[ar_slug]
-    return templates.TemplateResponse(page, {"request": request})
+    page = [ar for ar in articles if ar['url'] == ar_slug]
+    if not len(page):
+        return RedirectResponse(REF_URL, status_code=status.HTTP_303_SEE_OTHER)
+    return templates.TemplateResponse(page[0]['page'], {"request": request})
