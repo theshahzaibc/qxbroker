@@ -14,5 +14,15 @@
         <priority>0.8</priority>
     </url>
     {% endfor %}
+    <url>
+        <loc>https://www.quotexbroker.pk/about-quotex-pakistan</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://www.quotexbroker.pk/faqs</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
 
 </urlset>
