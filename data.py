@@ -5,7 +5,8 @@ articles = [
     {"url": "quotex-otc-1-minute-sureshot-strategy-2026", "page": "ar4.html"},
     {"url": "quotex-top-6-1-minute-otc-binary-trading-strategies", "page": "ar5.html"},
     {"url": "quotex-live-real-market-open-time-pakistan", "page": "ar6.html"},
-    {"url": "how-to-trade-on-order-black-with-100-accuracy-strategy", "page": "ar7.html"}
+    {"url": "how-to-trade-on-order-black-with-100-accuracy-strategy", "page": "ar7.html"},
+    {"url": "how-to-withdraw-from-quotex-in-pakistan", "page": "ar8.html"}
 ]
 
 sitemap = {
