@@ -30,6 +30,15 @@ async def index(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
 
+@app.get("/quotex-market", response_class=HTMLResponse)
+async def index(request: Request):
+    return templates.TemplateResponse("market.html", {"request": request})
+
+@app.get("/qxbroker-com", response_class=HTMLResponse)
+async def index(request: Request):
+    return templates.TemplateResponse("qxbrokercom.html", {"request": request})
+
+
 @app.get("/about-quotex-pakistan", response_class=HTMLResponse)
 async def index(request: Request):
     return templates.TemplateResponse("about.html", {"request": request})
