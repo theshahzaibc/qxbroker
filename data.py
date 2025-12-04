@@ -9,7 +9,8 @@ articles = [
     {"url": "how-to-withdraw-from-quotex-in-pakistan", "page": "ar8.html"},
     {"url": "quotex-withdrawal-problems-in-pakistan", "page": "ar9.html"},
     {"url": "quotex-pakistan-time-zone", "page": "ar10.html"},
-    {"url": "quotex-account-verification-pending-pakistan", "page": "ar11.html"}
+    {"url": "quotex-account-verification-pending-pakistan", "page": "ar11.html"},
+    {"url": "quotex-deposit-problem-solution", "page": "ar12.html"}
 ]
 
 sitemap = {
