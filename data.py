@@ -8,7 +8,8 @@ articles = [
     {"url": "how-to-trade-on-order-black-with-100-accuracy-strategy", "page": "ar7.html"},
     {"url": "how-to-withdraw-from-quotex-in-pakistan", "page": "ar8.html"},
     {"url": "quotex-withdrawal-problems-in-pakistan", "page": "ar9.html"},
-    {"url": "quotex-pakistan-time-zone", "page": "ar10.html"}
+    {"url": "quotex-pakistan-time-zone", "page": "ar10.html"},
+    {"url": "quotex-account-verification-pending-pakistan", "page": "ar11.html"}
 ]
 
 sitemap = {
