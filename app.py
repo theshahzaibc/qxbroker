@@ -61,7 +61,7 @@ async def blog(request: Request):
 
 
 @app.get("/article", response_class=HTMLResponse)
-async def articles(request: Request):
+async def base_article(request: Request):
     return templates.TemplateResponse("article.html", {"request": request})
 
 

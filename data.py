@@ -13,7 +13,6 @@ articles = [
     {"url": "quotex-deposit-problem-solution", "page": "ar12.html"},
     {"url": "quotex-live-free-signals", "page": "ar13.html"}
 ]
-
 sitemap = {
     "sitemap.xml": "sitemap.xml",
 }
