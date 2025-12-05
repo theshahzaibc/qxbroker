@@ -31,42 +31,48 @@ async def index(request: Request):
 
 
 @app.get("/quotex-market", response_class=HTMLResponse)
-async def index(request: Request):
+async def market(request: Request):
     return templates.TemplateResponse("market.html", {"request": request})
 
+
 @app.get("/qxbroker-com", response_class=HTMLResponse)
-async def index(request: Request):
+async def qxbrokercom(request: Request):
     return templates.TemplateResponse("qxbrokercom.html", {"request": request})
 
 
+@app.get("/quotex/promo-code", response_class=HTMLResponse)
+async def promo_codes(request: Request):
+    return templates.TemplateResponse("promo.html", {"request": request})
+
+
 @app.get("/about-quotex-pakistan", response_class=HTMLResponse)
-async def index(request: Request):
+async def about(request: Request):
     return templates.TemplateResponse("about.html", {"request": request})
 
 
 @app.get("/faqs", response_class=HTMLResponse)
-async def index(request: Request):
+async def faqs(request: Request):
     return templates.TemplateResponse("faqs.html", {"request": request})
 
 
 @app.get("/blog", response_class=HTMLResponse)
-async def index(request: Request):
+async def blog(request: Request):
     return templates.TemplateResponse("blog.html", {"request": request})
 
 
 @app.get("/article", response_class=HTMLResponse)
-async def index(request: Request):
+async def articles(request: Request):
     return templates.TemplateResponse("article.html", {"request": request})
 
 
 @app.get('/go/quotex')
-async def add(request: Request):
+async def goto(request: Request):
     # add_student(name, surname, _class)  # Adding student data
     return RedirectResponse(REF_URL, status_code=status.HTTP_303_SEE_OTHER)
 
 
 @app.get('/go/quotex/{slug}')
-async def add(slug: str):
+async def goto(slug: str):
     return RedirectResponse(REF_URL, status_code=status.HTTP_303_SEE_OTHER)
 
 
@@ -81,12 +87,12 @@ async def health_check():
 
 
 @app.get("/sitemap.xml", response_class=HTMLResponse)
-async def index(request: Request):
+async def sitemap(request: Request):
     return templates.TemplateResponse("sitemap.xml", {"request": request, "articles": articles})
 
 
 @app.get("/{ar_slug}", response_class=HTMLResponse)
-async def index(request: Request, ar_slug: str):
+async def article(request: Request, ar_slug: str):
     page = [ar for ar in articles if ar['url'] == ar_slug]
     if not len(page):
         return RedirectResponse(REF_URL, status_code=status.HTTP_303_SEE_OTHER)
