@@ -12,7 +12,8 @@ articles = [
     {"url": "quotex-account-verification-pending-pakistan", "page": "ar11.html"},
     {"url": "quotex-deposit-problem-solution", "page": "ar12.html"},
     {"url": "quotex-live-free-signals", "page": "ar13.html"},
-    {"url": "90-deposit-bonus-promo-code", "page": "ar14.html"}
+    {"url": "90-deposit-bonus-promo-code", "page": "ar14.html"},
+    {"url": "is-quotex-banned-in-pakistan", "page": "ar15.html"}
 ]
 sitemap = {
     "sitemap.xml": "sitemap.xml",
