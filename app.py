@@ -35,6 +35,16 @@ async def market(request: Request):
     return templates.TemplateResponse("market.html", {"request": request})
 
 
+@app.get("/quotex-trading", response_class=HTMLResponse)
+async def trading(request: Request):
+    return templates.TemplateResponse("quotex-trading.html", {"request": request})
+
+
+@app.get("/quotex-demo", response_class=HTMLResponse)
+async def demo_account(request: Request):
+    return templates.TemplateResponse("quotex-demo.html", {"request": request})
+
+
 @app.get("/qxbroker-com", response_class=HTMLResponse)
 async def qxbrokercom(request: Request):
     return templates.TemplateResponse("qxbrokercom.html", {"request": request})
