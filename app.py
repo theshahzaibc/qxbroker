@@ -45,6 +45,11 @@ async def demo_account(request: Request):
     return templates.TemplateResponse("quotex-demo.html", {"request": request})
 
 
+@app.get("/quotex-login", response_class=HTMLResponse)
+async def demo_account(request: Request):
+    return templates.TemplateResponse("quotex-login.html", {"request": request})
+
+
 @app.get("/qxbroker-com", response_class=HTMLResponse)
 async def qxbrokercom(request: Request):
     return templates.TemplateResponse("qxbrokercom.html", {"request": request})
