@@ -59,6 +59,10 @@ async def qxbrokercom(request: Request):
 async def promo_codes(request: Request):
     return templates.TemplateResponse("promo.html", {"request": request})
 
+@app.get("/quotex/weekly-promo-code-bonus-today", response_class=HTMLResponse)
+async def weekly_promo_codes(request: Request):
+    return templates.TemplateResponse("promo2.html", {"request": request})
+
 
 @app.get("/about-quotex-pakistan", response_class=HTMLResponse)
 async def about(request: Request):
