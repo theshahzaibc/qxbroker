@@ -6,6 +6,7 @@ from fastapi.responses import RedirectResponse
 import os
 from dotenv import load_dotenv
 from data import articles
+from datetime import datetime, date
 
 load_dotenv()
 REF_URL = os.getenv('REF_URL')
@@ -57,11 +58,22 @@ async def qxbrokercom(request: Request):
 
 @app.get("/quotex/promo-code", response_class=HTMLResponse)
 async def promo_codes(request: Request):
-    return templates.TemplateResponse("promo.html", {"request": request})
+    today = date.today()
+    xmas_target_date = date(2025, 12, 27)
+    supper_target_date = date(2025, 12, 27)
+    is_xmas_ended = xmas_target_date <= today
+    is_super_ended = supper_target_date <= today
+    return templates.TemplateResponse("promo.html", {"request": request, "is_xmas_ended": is_xmas_ended, "is_super_ended": is_super_ended})
+
 
 @app.get("/quotex/weekly-promo-code-bonus-today", response_class=HTMLResponse)
 async def weekly_promo_codes(request: Request):
-    return templates.TemplateResponse("promo2.html", {"request": request})
+    today = date.today()
+    xmas_target_date = date(2025, 12, 27)
+    supper_target_date = date(2025, 12, 27)
+    is_xmas_ended = xmas_target_date <= today
+    is_super_ended = supper_target_date <= today
+    return templates.TemplateResponse("promo2.html", {"request": request, "is_xmas_ended": is_xmas_ended, "is_super_ended": is_super_ended})
 
 
 @app.get("/about-quotex-pakistan", response_class=HTMLResponse)

@@ -15,7 +15,8 @@ articles = [
     {"url": "90-deposit-bonus-promo-code", "page": "ar14.html"},
     {"url": "is-quotex-banned-in-pakistan", "page": "ar15.html"},
     {"url": "70-deposit-welcome-bonus-promo-code", "page": "ar16.html"},
-    {"url": "quotex-withdrawal-charges", "page": "ar17.html"}
+    {"url": "quotex-withdrawal-charges", "page": "ar17.html"},
+    {"url": "quotex-xmas-deposit-bonus-promo-code", "page": "ar18.html"}
 ]
 sitemap = {
     "sitemap.xml": "sitemap.xml",

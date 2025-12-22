@@ -220,6 +220,7 @@
         <div class="main_promocodes">
             <h2 class="center">WEEKLY  BONUS - ENDING SOON</h2>
             <p>Promo codes are valid until the end of the week. The number of activations is limited. Open a new <a href="/go/quotex/">Quotex account</a></p>
+            <p> 🔹 <span class="promocode">QXMAS90</span>: 90% Weekly Bonus for deposits over $30</p>
             <p> 🔹 <span class="promocode">QXSUPER90</span>: 90% Weekly Bonus for deposits over $150</p>
             <p> 🔹 <span class="promocode">QXNICE80</span>: 80% Weekly Bonus for deposits over $75</p>
             <p> 🔹 <span class="promocode">QXCOOL70</span>: 70% Weekly Bonus for deposits over $25</p>
@@ -275,19 +276,24 @@ Above is the latest list of Quotex promo codes, how they work, how to apply them
             </thead>
             <tbody>
                 <tr>
+                    <td><strong>QXMAS90</strong></td>
+                    <td>90% Weekend Deposit Bonus</td>
+                    <td>{% if is_xmas_ended %} Ended {% else %} Active {% endif %}</td>
+                </tr>
+                <tr>
                     <td><strong>QXSUPER90</strong></td>
                     <td>90% Weekend Deposit Bonus</td>
-                    <td>Active</td>
+                    <td>{% if is_super_ended %} Ended {% else %} Active {% endif %}</td>
                 </tr>
                 <tr>
                     <td><strong>QXNICE80</strong></td>
                     <td>80% Weekend Deposit Bonus</td>
-                    <td>Active</td>
+                    <td>{% if is_super_ended %} Ended {% else %} Active {% endif %}</td>
                 </tr>
                 <tr>
                     <td><strong>QXCOOL70</strong></td>
                     <td>70% Weekend Deposit Bonus</td>
-                    <td>Active</td>
+                    <td>{% if is_super_ended %} Ended {% else %} Active {% endif %}</td>
                 </tr>
                 <tr>
                     <td><strong>WELCOME70</strong></td>
