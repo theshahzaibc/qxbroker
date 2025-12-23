@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Request, status
+from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
@@ -6,7 +6,7 @@ from fastapi.responses import RedirectResponse
 import os
 from dotenv import load_dotenv
 from data import articles
-from datetime import datetime, date
+from datetime import date
 
 load_dotenv()
 REF_URL = os.getenv('REF_URL')
@@ -22,38 +22,38 @@ async def redirect_to_custom_domain(request: Request, call_next):
     host = request.headers.get("host", "")
     if host.endswith("onrender.com"):
         url = str(request.url).replace(host, CUSTOM_DOMAIN)
-        return RedirectResponse(url=url)
+        return RedirectResponse(url=url, status_code=301)
     return await call_next(request)
 
 
 @app.get("/", response_class=HTMLResponse)
 async def index(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
+    return templates.TemplateResponse("index.html", {"request": request, "ref_url": REF_URL})
 
 
 @app.get("/quotex-market", response_class=HTMLResponse)
 async def market(request: Request):
-    return templates.TemplateResponse("market.html", {"request": request})
+    return templates.TemplateResponse("market.html", {"request": request, "ref_url": REF_URL})
 
 
 @app.get("/quotex-trading", response_class=HTMLResponse)
 async def trading(request: Request):
-    return templates.TemplateResponse("quotex-trading.html", {"request": request})
+    return templates.TemplateResponse("quotex-trading.html", {"request": request, "ref_url": REF_URL})
 
 
 @app.get("/quotex-demo", response_class=HTMLResponse)
 async def demo_account(request: Request):
-    return templates.TemplateResponse("quotex-demo.html", {"request": request})
+    return templates.TemplateResponse("quotex-demo.html", {"request": request, "ref_url": REF_URL})
 
 
 @app.get("/quotex-login", response_class=HTMLResponse)
 async def demo_account(request: Request):
-    return templates.TemplateResponse("quotex-login.html", {"request": request})
+    return templates.TemplateResponse("quotex-login.html", {"request": request, "ref_url": REF_URL})
 
 
 @app.get("/qxbroker-com", response_class=HTMLResponse)
 async def qxbrokercom(request: Request):
-    return templates.TemplateResponse("qxbrokercom.html", {"request": request})
+    return templates.TemplateResponse("qxbrokercom.html", {"request": request, "ref_url": REF_URL})
 
 
 @app.get("/quotex/promo-code", response_class=HTMLResponse)
@@ -63,7 +63,8 @@ async def promo_codes(request: Request):
     supper_target_date = date(2025, 12, 27)
     is_xmas_ended = xmas_target_date <= today
     is_super_ended = supper_target_date <= today
-    return templates.TemplateResponse("promo.html", {"request": request, "is_xmas_ended": is_xmas_ended, "is_super_ended": is_super_ended})
+    return templates.TemplateResponse("promo.html", {"request": request, "ref_url": REF_URL, "is_xmas_ended": is_xmas_ended,
+                                                     "is_super_ended": is_super_ended})
 
 
 @app.get("/quotex/weekly-promo-code-bonus-today", response_class=HTMLResponse)
@@ -73,43 +74,44 @@ async def weekly_promo_codes(request: Request):
     supper_target_date = date(2025, 12, 27)
     is_xmas_ended = xmas_target_date <= today
     is_super_ended = supper_target_date <= today
-    return templates.TemplateResponse("promo2.html", {"request": request, "is_xmas_ended": is_xmas_ended, "is_super_ended": is_super_ended})
+    return templates.TemplateResponse("promo2.html", {"request": request, "ref_url": REF_URL, "is_xmas_ended": is_xmas_ended,
+                                                      "is_super_ended": is_super_ended})
 
 
 @app.get("/about-quotex-pakistan", response_class=HTMLResponse)
 async def about(request: Request):
-    return templates.TemplateResponse("about.html", {"request": request})
+    return templates.TemplateResponse("about.html", {"request": request, "ref_url": REF_URL})
 
 
 @app.get("/faqs", response_class=HTMLResponse)
 async def faqs(request: Request):
-    return templates.TemplateResponse("faqs.html", {"request": request})
+    return templates.TemplateResponse("faqs.html", {"request": request, "ref_url": REF_URL})
 
 
 @app.get("/blog", response_class=HTMLResponse)
 async def blog(request: Request):
-    return templates.TemplateResponse("blog.html", {"request": request})
+    return templates.TemplateResponse("blog.html", {"request": request, "ref_url": REF_URL})
 
 
 @app.get("/article", response_class=HTMLResponse)
 async def base_article(request: Request):
-    return templates.TemplateResponse("article.html", {"request": request})
+    return templates.TemplateResponse("article.html", {"request": request, "ref_url": REF_URL})
 
 
 @app.get('/go/quotex')
 async def goto(request: Request):
     # add_student(name, surname, _class)  # Adding student data
-    return RedirectResponse(REF_URL, status_code=status.HTTP_303_SEE_OTHER)
+    return RedirectResponse(REF_URL, status_code=302)
 
 
 @app.get('/go/quotex/{slug}')
 async def goto(slug: str):
-    return RedirectResponse(REF_URL, status_code=status.HTTP_303_SEE_OTHER)
+    return RedirectResponse(REF_URL, status_code=302)
 
 
 @app.exception_handler(404)
 async def custom_404_handler(request: Request, exc):
-    return RedirectResponse(REF_URL, status_code=status.HTTP_303_SEE_OTHER)
+    return RedirectResponse(REF_URL, status_code=302)
 
 
 @app.api_route("/health", methods=["GET", "HEAD", "POST", "PUT"])
@@ -126,5 +128,5 @@ async def sitemap(request: Request):
 async def article(request: Request, ar_slug: str):
     page = [ar for ar in articles if ar['url'] == ar_slug]
     if not len(page):
-        return RedirectResponse(REF_URL, status_code=status.HTTP_303_SEE_OTHER)
-    return templates.TemplateResponse(page[0]['page'], {"request": request})
+        return RedirectResponse(REF_URL, status_code=302)
+    return templates.TemplateResponse(page[0]['page'], {"request": request, "ref_url": REF_URL})
