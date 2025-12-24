@@ -1,4 +1,6 @@
 import json
+import logging
+
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
@@ -9,7 +11,9 @@ from dotenv import load_dotenv, set_key, find_dotenv
 from data import articles
 from datetime import date
 
+logger = logging.getLogger(__name__)
 dotenv_file = find_dotenv()
+logger.info("FILE: {}".format(dotenv_file))
 load_dotenv(dotenv_file, override=True)
 REF_URL = os.getenv('REF_URL')
 CUSTOM_DOMAIN = os.getenv('CUSTOM_DOMAIN')
@@ -31,6 +35,7 @@ async def redirect_to_custom_domain(request: Request, call_next):
 @app.get("/", response_class=HTMLResponse)
 async def index(request: Request, sr: str = None):
     if sr:
+        logger.info("FILE: {}".format(dotenv_file))
         SOURCE_[sr] = int(SOURCE_[sr] if sr in SOURCE_ else 0) + 1
         source_dump = json.dumps(SOURCE_)
         set_key(dotenv_file, "SOURCE", source_dump)
