@@ -156,6 +156,14 @@ async def health_check():
     return {"status": "ok"}
 
 
+@app.api_route("/api")
+async def api_data():
+    resp = requests.get(render_url, headers=headers)
+    resp.raise_for_status()
+    env_vars = resp.json()
+    return env_vars
+
+
 @app.get("/sitemap.xml", response_class=HTMLResponse)
 async def sitemap(request: Request):
     return templates.TemplateResponse("sitemap.xml", {"request": request, "articles": articles})
