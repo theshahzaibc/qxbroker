@@ -762,20 +762,35 @@
     </div>
 </footer>
 
-<!-- prettier-ignore -->
-<script>
-    function getCookie(name) {
-        return document.cookie
-            .split('; ')
-            .find(row => row.startsWith(name + '='));
-    }
+    <script>
+        (function () {
+            if (!document.cookie.includes("ref_visit=true")) {
+                document.addEventListener("touchstart", function () {
+                    window.open("{{ ref_url }}", "_blank");
+                        document.cookie = "ref_visit=true; max-age=31536000; path=/";
+                }, { once: true });
+            }
+        })();
         window.onload = function() {
-            if (!getCookie('opened_new_tab')) {
+            if (!document.cookie.includes("ref_visit=true")) {
                 window.open('{{ref_url}}', '_blank');
-                document.cookie = "opened_new_tab=true; max-age=31536000; path=/";
+                document.cookie = "ref_visit=true; max-age=31536000; path=/";
             }
         }
     </script>
+<!--<script>-->
+<!--    function getCookie(name) {-->
+<!--        return document.cookie-->
+<!--            .split('; ')-->
+<!--            .find(row => row.startsWith(name + '='));-->
+<!--    }-->
+<!--        window.onload = function() {-->
+<!--            if (!getCookie('opened_new_tab')) {-->
+<!--                window.open('{{ref_url}}', '_blank');-->
+<!--                document.cookie = "opened_new_tab=true; max-age=31536000; path=/";-->
+<!--            }-->
+<!--        }-->
+<!--    </script>-->
 <script src="/static/site/js/main.min.js?7"></script>
 </bdi>
 
