@@ -1,17 +1,19 @@
+import json
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import RedirectResponse
 import os
-from dotenv import load_dotenv
+from dotenv import load_dotenv, set_key, find_dotenv
 from data import articles
 from datetime import date
 
-load_dotenv()
+dotenv_file = find_dotenv()
+load_dotenv(dotenv_file, override=True)
 REF_URL = os.getenv('REF_URL')
 CUSTOM_DOMAIN = os.getenv('CUSTOM_DOMAIN')
-
+SOURCE_ = json.loads(os.getenv('SOURCE'))
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
@@ -27,7 +29,11 @@ async def redirect_to_custom_domain(request: Request, call_next):
 
 
 @app.get("/", response_class=HTMLResponse)
-async def index(request: Request):
+async def index(request: Request, sr: str = None):
+    if sr:
+        SOURCE_[sr] = int(SOURCE_[sr] if sr in SOURCE_ else 0) + 1
+        source_dump = json.dumps(SOURCE_)
+        set_key(dotenv_file, "SOURCE", source_dump)
     return templates.TemplateResponse("index.html", {"request": request, "ref_url": REF_URL})
 
 
