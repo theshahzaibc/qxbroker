@@ -1,23 +1,29 @@
 import json
 import logging
-
+import requests
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import RedirectResponse
 import os
-from dotenv import load_dotenv, set_key, find_dotenv
+from dotenv import load_dotenv
 from data import articles
 from datetime import date
 
-logger = logging.getLogger(__name__)
-dotenv_file = find_dotenv()
-logger.info("FILE: {}".format(dotenv_file))
-load_dotenv(dotenv_file, override=True)
+load_dotenv()
 REF_URL = os.getenv('REF_URL')
 CUSTOM_DOMAIN = os.getenv('CUSTOM_DOMAIN')
+RENDER_API_KEY = os.getenv('RENDER_API_KEY')
+SERVICE_ID = os.getenv('SERVICE_ID')
 SOURCE_ = json.loads(os.getenv('SOURCE'))
+
+render_url = f"https://api.render.com/v1/services/{SERVICE_ID}/env-vars"
+headers = {
+    "Authorization": f"Bearer {RENDER_API_KEY}",
+    "Content-Type": "application/json"
+}
+
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
@@ -32,13 +38,31 @@ async def redirect_to_custom_domain(request: Request, call_next):
     return await call_next(request)
 
 
+async def update_env_development(source_dump):
+    resp = requests.get(render_url, headers=headers)
+    resp.raise_for_status()
+    env_vars = resp.json()
+    PAYLOAD_ = []
+    TARGET_KEY = "SOURCE"
+    NEW_VALUE = source_dump
+    for env in env_vars:
+        if env["envVar"]["key"] == TARGET_KEY:
+            env["envVar"]["value"] = NEW_VALUE
+        PAYLOAD_.append({"key": env["envVar"]["key"], "value": env["envVar"]["value"]})
+    response = requests.put(render_url, headers=headers, json=PAYLOAD_)
+    response.raise_for_status()
+    if response.status_code == 200:
+        logging.info("✅ Environment variables updated successfully")
+    else:
+        logging.error("❌ Failed: {} {}".format(response.status_code, response.text))
+
+
 @app.get("/", response_class=HTMLResponse)
 async def index(request: Request, sr: str = None):
     if sr:
-        logger.info("FILE: {}".format(dotenv_file))
         SOURCE_[sr] = int(SOURCE_[sr] if sr in SOURCE_ else 0) + 1
         source_dump = json.dumps(SOURCE_)
-        set_key(dotenv_file, "SOURCE", source_dump)
+        await update_env_development(source_dump)
     return templates.TemplateResponse("index.html", {"request": request, "ref_url": REF_URL})
 
 
@@ -74,8 +98,9 @@ async def promo_codes(request: Request):
     supper_target_date = date(2025, 12, 27)
     is_xmas_ended = xmas_target_date <= today
     is_super_ended = supper_target_date <= today
-    return templates.TemplateResponse("promo.html", {"request": request, "ref_url": REF_URL, "is_xmas_ended": is_xmas_ended,
-                                                     "is_super_ended": is_super_ended})
+    return templates.TemplateResponse("promo.html",
+                                      {"request": request, "ref_url": REF_URL, "is_xmas_ended": is_xmas_ended,
+                                       "is_super_ended": is_super_ended})
 
 
 @app.get("/quotex/weekly-promo-code-bonus-today", response_class=HTMLResponse)
@@ -85,8 +110,9 @@ async def weekly_promo_codes(request: Request):
     supper_target_date = date(2025, 12, 27)
     is_xmas_ended = xmas_target_date <= today
     is_super_ended = supper_target_date <= today
-    return templates.TemplateResponse("promo2.html", {"request": request, "ref_url": REF_URL, "is_xmas_ended": is_xmas_ended,
-                                                      "is_super_ended": is_super_ended})
+    return templates.TemplateResponse("promo2.html",
+                                      {"request": request, "ref_url": REF_URL, "is_xmas_ended": is_xmas_ended,
+                                       "is_super_ended": is_super_ended})
 
 
 @app.get("/about-quotex-pakistan", response_class=HTMLResponse)
