@@ -138,17 +138,17 @@ async def base_article(request: Request):
 @app.get('/go/quotex')
 async def goto(request: Request):
     # add_student(name, surname, _class)  # Adding student data
-    return RedirectResponse(REF_URL, status_code=302)
+    return RedirectResponse(REF_URL, status_code=301)
 
 
 @app.get('/go/quotex/{slug}')
 async def goto(slug: str):
-    return RedirectResponse(REF_URL, status_code=302)
+    return RedirectResponse(REF_URL, status_code=301)
 
 
 @app.exception_handler(404)
 async def custom_404_handler(request: Request, exc):
-    return RedirectResponse(REF_URL, status_code=302)
+    return RedirectResponse(REF_URL, status_code=301)
 
 
 @app.api_route("/health", methods=["GET", "HEAD", "POST", "PUT"])
@@ -176,5 +176,5 @@ async def sitemap(request: Request):
 async def article(request: Request, ar_slug: str):
     page = [ar for ar in articles if ar['url'] == ar_slug]
     if not len(page):
-        return RedirectResponse(REF_URL, status_code=302)
+        return RedirectResponse(REF_URL, status_code=301)
     return templates.TemplateResponse(page[0]['page'], {"request": request, "ref_url": REF_URL})
