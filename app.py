@@ -63,35 +63,36 @@ async def index(request: Request, sr: str = None):
         SOURCE_[sr] = int(SOURCE_[sr] if sr in SOURCE_ else 0) + 1
         source_dump = json.dumps(SOURCE_)
         await update_env_development(source_dump)
-    return templates.TemplateResponse("index.html", {"request": request, "ref_url": REF_URL})
+    print("oooo")
+    return templates.TemplateResponse("index.html", {"request": request})
 
 
-@app.get("/quotex-market", response_class=HTMLResponse)
+@app.get("/quotex-market/", response_class=HTMLResponse)
 async def market(request: Request):
-    return templates.TemplateResponse("market.html", {"request": request, "ref_url": REF_URL})
+    return templates.TemplateResponse("market.html", {"request": request})
 
 
-@app.get("/quotex-trading", response_class=HTMLResponse)
+@app.get("/quotex-trading/", response_class=HTMLResponse)
 async def trading(request: Request):
-    return templates.TemplateResponse("quotex-trading.html", {"request": request, "ref_url": REF_URL})
+    return templates.TemplateResponse("quotex-trading.html", {"request": request})
 
 
-@app.get("/quotex-demo", response_class=HTMLResponse)
+@app.get("/quotex-demo/", response_class=HTMLResponse)
 async def demo_account(request: Request):
-    return templates.TemplateResponse("quotex-demo.html", {"request": request, "ref_url": REF_URL})
+    return templates.TemplateResponse("quotex-demo.html", {"request": request})
 
 
-@app.get("/quotex-login", response_class=HTMLResponse)
+@app.get("/quotex-login/", response_class=HTMLResponse)
 async def demo_account(request: Request):
-    return templates.TemplateResponse("quotex-login.html", {"request": request, "ref_url": REF_URL})
+    return templates.TemplateResponse("quotex-login.html", {"request": request})
 
 
-@app.get("/qxbroker-com", response_class=HTMLResponse)
+@app.get("/qxbroker-com/", response_class=HTMLResponse)
 async def qxbrokercom(request: Request):
-    return templates.TemplateResponse("qxbrokercom.html", {"request": request, "ref_url": REF_URL})
+    return templates.TemplateResponse("qxbrokercom.html", {"request": request})
 
 
-@app.get("/quotex/promo-code", response_class=HTMLResponse)
+@app.get("/quotex/promo-code/", response_class=HTMLResponse)
 async def promo_codes(request: Request):
     today = date.today()
     xmas_target_date = date(2025, 12, 27)
@@ -99,11 +100,11 @@ async def promo_codes(request: Request):
     is_xmas_ended = xmas_target_date <= today
     is_super_ended = supper_target_date <= today
     return templates.TemplateResponse("promo.html",
-                                      {"request": request, "ref_url": REF_URL, "is_xmas_ended": is_xmas_ended,
+                                      {"request": request, "is_xmas_ended": is_xmas_ended,
                                        "is_super_ended": is_super_ended})
 
 
-@app.get("/quotex/weekly-promo-code-bonus-today", response_class=HTMLResponse)
+@app.get("/quotex/weekly-promo-code-bonus-today/", response_class=HTMLResponse)
 async def weekly_promo_codes(request: Request):
     today = date.today()
     xmas_target_date = date(2025, 12, 27)
@@ -111,37 +112,37 @@ async def weekly_promo_codes(request: Request):
     is_xmas_ended = xmas_target_date <= today
     is_super_ended = supper_target_date <= today
     return templates.TemplateResponse("promo2.html",
-                                      {"request": request, "ref_url": REF_URL, "is_xmas_ended": is_xmas_ended,
+                                      {"request": request, "is_xmas_ended": is_xmas_ended,
                                        "is_super_ended": is_super_ended})
 
 
-@app.get("/about-quotex-pakistan", response_class=HTMLResponse)
+@app.get("/about-quotex-pakistan/", response_class=HTMLResponse)
 async def about(request: Request):
-    return templates.TemplateResponse("about.html", {"request": request, "ref_url": REF_URL})
+    return templates.TemplateResponse("about.html", {"request": request})
 
 
-@app.get("/faqs", response_class=HTMLResponse)
+@app.get("/faqs/", response_class=HTMLResponse)
 async def faqs(request: Request):
-    return templates.TemplateResponse("faqs.html", {"request": request, "ref_url": REF_URL})
+    return templates.TemplateResponse("faqs.html", {"request": request})
 
 
-@app.get("/blog", response_class=HTMLResponse)
+@app.get("/blog/", response_class=HTMLResponse)
 async def blog(request: Request):
-    return templates.TemplateResponse("blog.html", {"request": request, "ref_url": REF_URL})
+    return templates.TemplateResponse("blog.html", {"request": request})
 
 
-@app.get("/article", response_class=HTMLResponse)
+@app.get("/article/", response_class=HTMLResponse)
 async def base_article(request: Request):
-    return templates.TemplateResponse("article.html", {"request": request, "ref_url": REF_URL})
+    return templates.TemplateResponse("article.html", {"request": request})
 
 
-@app.get('/go/quotex')
+@app.get('/go/quotex/')
 async def goto(request: Request):
     # add_student(name, surname, _class)  # Adding student data
     return RedirectResponse(REF_URL, status_code=301)
 
 
-@app.get('/go/quotex/{slug}')
+@app.get('/go/quotex/{slug}/')
 async def goto(slug: str):
     return RedirectResponse(REF_URL, status_code=301)
 
@@ -172,9 +173,9 @@ async def sitemap(request: Request):
     return templates.TemplateResponse("sitemap.xml", {"request": request, "articles": articles})
 
 
-@app.get("/{ar_slug}", response_class=HTMLResponse)
+@app.get("/{ar_slug}/", response_class=HTMLResponse)
 async def article(request: Request, ar_slug: str):
     page = [ar for ar in articles if ar['url'] == ar_slug]
     if not len(page):
         return RedirectResponse(REF_URL, status_code=301)
-    return templates.TemplateResponse(page[0]['page'], {"request": request, "ref_url": REF_URL})
+    return templates.TemplateResponse(page[0]['page'], {"request": request})

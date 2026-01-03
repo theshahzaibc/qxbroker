@@ -761,23 +761,6 @@
         </div>
     </div>
 </footer>
-
-    <script>
-        (function () {
-            if (!document.cookie.includes("ref_visit=true")) {
-                document.addEventListener("touchstart", function () {
-                    window.open("{{ ref_url }}", "_blank");
-                        document.cookie = "ref_visit=true; max-age=31536000; path=/";
-                }, { once: true });
-            }
-        })();
-        window.onload = function() {
-            if (!document.cookie.includes("ref_visit=true")) {
-                window.open('{{ref_url}}', '_blank');
-                document.cookie = "ref_visit=true; max-age=31536000; path=/";
-            }
-        }
-    </script>
 <script src="/static/site/js/main.min.js?7"></script>
 </bdi>
 
