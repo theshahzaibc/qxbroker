@@ -63,7 +63,6 @@ async def index(request: Request, sr: str = None):
         SOURCE_[sr] = int(SOURCE_[sr] if sr in SOURCE_ else 0) + 1
         source_dump = json.dumps(SOURCE_)
         await update_env_development(source_dump)
-    print("oooo")
     return templates.TemplateResponse("index.html", {"request": request})
 
 
@@ -139,17 +138,23 @@ async def base_article(request: Request):
 @app.get('/go/quotex/')
 async def goto(request: Request):
     # add_student(name, surname, _class)  # Adding student data
-    return RedirectResponse(REF_URL, status_code=301)
+    response = RedirectResponse(REF_URL, status_code=302)
+    response.headers["Referrer-Policy"] = "no-referrer"
+    return response
 
 
 @app.get('/go/quotex/{slug}/')
 async def goto(slug: str):
-    return RedirectResponse(REF_URL, status_code=301)
+    response = RedirectResponse(REF_URL, status_code=302)
+    response.headers["Referrer-Policy"] = "no-referrer"
+    return response
 
 
 @app.exception_handler(404)
 async def custom_404_handler(request: Request, exc):
-    return RedirectResponse(REF_URL, status_code=301)
+    response = RedirectResponse(REF_URL, status_code=302)
+    response.headers["Referrer-Policy"] = "no-referrer"
+    return response
 
 
 @app.api_route("/health", methods=["GET", "HEAD", "POST", "PUT"])
@@ -177,5 +182,7 @@ async def sitemap(request: Request):
 async def article(request: Request, ar_slug: str):
     page = [ar for ar in articles if ar['url'] == ar_slug]
     if not len(page):
-        return RedirectResponse(REF_URL, status_code=301)
+        response = RedirectResponse(REF_URL, status_code=302)
+        response.headers["Referrer-Policy"] = "no-referrer"
+        return response
     return templates.TemplateResponse(page[0]['page'], {"request": request})
