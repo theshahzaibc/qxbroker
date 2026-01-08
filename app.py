@@ -129,6 +129,7 @@ async def custom_404_handler(request: Request, exc):
 async def health_check():
     return {"status": "ok"}
 
+
 @app.get("/sitemap.xml", response_class=HTMLResponse)
 async def sitemap(request: Request):
     return templates.TemplateResponse("sitemap.xml", {"request": request, "articles": articles})
