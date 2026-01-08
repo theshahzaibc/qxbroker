@@ -23,7 +23,7 @@ templates = Jinja2Templates(directory="templates")
 @app.middleware("http")
 async def redirect_to_custom_domain(request: Request, call_next):
     host = request.headers.get("host", "")
-    if host.endswith("onrender.com"):
+    if host.endswith("onrender.com") or host.endswith("fly.dev"):
         url = str(request.url).replace(host, CUSTOM_DOMAIN)
         return RedirectResponse(url=url, status_code=301)
     return await call_next(request)
