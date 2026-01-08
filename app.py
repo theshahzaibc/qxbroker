@@ -14,15 +14,6 @@ from datetime import date
 load_dotenv()
 REF_URL = os.getenv('REF_URL')
 CUSTOM_DOMAIN = os.getenv('CUSTOM_DOMAIN')
-RENDER_API_KEY = os.getenv('RENDER_API_KEY')
-SERVICE_ID = os.getenv('SERVICE_ID')
-SOURCE_ = json.loads(os.getenv('SOURCE'))
-
-render_url = f"https://api.render.com/v1/services/{SERVICE_ID}/env-vars"
-headers = {
-    "Authorization": f"Bearer {RENDER_API_KEY}",
-    "Content-Type": "application/json"
-}
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
@@ -38,31 +29,8 @@ async def redirect_to_custom_domain(request: Request, call_next):
     return await call_next(request)
 
 
-async def update_env_development(source_dump):
-    resp = requests.get(render_url, headers=headers)
-    resp.raise_for_status()
-    env_vars = resp.json()
-    PAYLOAD_ = []
-    TARGET_KEY = "SOURCE"
-    NEW_VALUE = source_dump
-    for env in env_vars:
-        if env["envVar"]["key"] == TARGET_KEY:
-            env["envVar"]["value"] = NEW_VALUE
-        PAYLOAD_.append({"key": env["envVar"]["key"], "value": env["envVar"]["value"]})
-    response = requests.put(render_url, headers=headers, json=PAYLOAD_)
-    response.raise_for_status()
-    if response.status_code == 200:
-        logging.info("✅ Environment variables updated successfully")
-    else:
-        logging.error("❌ Failed: {} {}".format(response.status_code, response.text))
-
-
 @app.get("/", response_class=HTMLResponse)
-async def index(request: Request, sr: str = None):
-    if sr:
-        SOURCE_[sr] = int(SOURCE_[sr] if sr in SOURCE_ else 0) + 1
-        source_dump = json.dumps(SOURCE_)
-        await update_env_development(source_dump)
+async def index(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
 
@@ -160,18 +128,6 @@ async def custom_404_handler(request: Request, exc):
 @app.api_route("/health", methods=["GET", "HEAD", "POST", "PUT"])
 async def health_check():
     return {"status": "ok"}
-
-
-@app.api_route("/api")
-async def api_data(key:str = None):
-    if key == "QXPROFITKING":
-        resp = requests.get(render_url, headers=headers)
-        resp.raise_for_status()
-        env_vars = resp.json()
-        return env_vars
-    return {"message": "Invalid gateway"}
-
-
 
 @app.get("/sitemap.xml", response_class=HTMLResponse)
 async def sitemap(request: Request):
