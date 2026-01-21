@@ -34,6 +34,11 @@ async def index(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
 
+@app.get("/pk/", response_class=HTMLResponse)
+async def index(request: Request):
+    return templates.TemplateResponse("home.html", {"request": request})
+
+
 @app.get("/quotex-market/", response_class=HTMLResponse)
 async def market(request: Request):
     return templates.TemplateResponse("market.html", {"request": request})
