@@ -14,7 +14,7 @@
     </url>
     {% for item in articles %}
     <url>
-        <loc>https://www.quotexbroker.pk/{{ item.url }}/</loc>
+        <loc>https://www.quotexbroker.pk/{{ item.url }}</loc>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>

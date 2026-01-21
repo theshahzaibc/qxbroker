@@ -93,6 +93,7 @@ async def about(request: Request):
     return templates.TemplateResponse("about.html", {"request": request})
 
 
+@app.get("/faqs", response_class=HTMLResponse)
 @app.get("/faqs/", response_class=HTMLResponse)
 async def faqs(request: Request):
     return templates.TemplateResponse("faqs.html", {"request": request})
@@ -140,6 +141,7 @@ async def sitemap(request: Request):
     return templates.TemplateResponse("sitemap.xml", {"request": request, "articles": articles})
 
 
+@app.get("/{ar_slug}", response_class=HTMLResponse)
 @app.get("/{ar_slug}/", response_class=HTMLResponse)
 async def article(request: Request, ar_slug: str):
     page = [ar for ar in articles if ar['url'] == ar_slug]
