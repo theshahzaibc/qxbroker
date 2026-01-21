@@ -3,9 +3,14 @@
 
     <!-- Blog Listing Page (Updated Daily) -->
     <url>
-        <loc>https://www.quotexbroker.pk/blog</loc>
+        <loc>https://www.quotexbroker.pk/pk/</loc>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
+    </url>
+    <url>
+        <loc>https://www.quotexbroker.pk/blog/</loc>
+        <changefreq>daily</changefreq>
+        <priority>0.8</priority>
     </url>
     {% for item in articles %}
     <url>
@@ -15,47 +20,47 @@
     </url>
     {% endfor %}
     <url>
-        <loc>https://www.quotexbroker.pk/about-quotex-pakistan</loc>
+        <loc>https://www.quotexbroker.pk/about-quotex-pakistan/</loc>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://www.quotexbroker.pk/faqs</loc>
+        <loc>https://www.quotexbroker.pk/faqs/</loc>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://www.quotexbroker.pk/quotex-market</loc>
+        <loc>https://www.quotexbroker.pk/quotex-market/</loc>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://www.quotexbroker.pk/quotex-trading</loc>
+        <loc>https://www.quotexbroker.pk/quotex-trading/</loc>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://www.quotexbroker.pk/quotex-demo</loc>
+        <loc>https://www.quotexbroker.pk/quotex-demo/</loc>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://www.quotexbroker.pk/quotex-login</loc>
+        <loc>https://www.quotexbroker.pk/quotex-login/</loc>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://www.quotexbroker.pk/qxbroker-com</loc>
+        <loc>https://www.quotexbroker.pk/qxbroker-com/</loc>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://www.quotexbroker.pk/quotex/promo-code</loc>
+        <loc>https://www.quotexbroker.pk/quotex/promo-code/</loc>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
-        <loc>https://www.quotexbroker.pk/quotex/weekly-promo-code-bonus-today</loc>
+        <loc>https://www.quotexbroker.pk/quotex/weekly-promo-code-bonus-today/</loc>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
